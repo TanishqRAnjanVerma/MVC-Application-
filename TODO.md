@@ -1,0 +1,2 @@
+- [x] Fix parameter order in product.model.js add method to match constructor (\_id, \_name, \_price, \_desc, \_imageURl)
+- [x] Update product.controller.js: replace second ProductModel.add() with ProductModel.get(), enhance price validation to check for valid positive number, add presence check for imageUrl
