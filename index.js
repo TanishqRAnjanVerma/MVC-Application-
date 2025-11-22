@@ -59,4 +59,6 @@ server.post("/update-product", productController.postUpdateProduct);
 server.use(express.static("src/views"));
 server.use(express.static("public"));
 
-server.listen(3400);
+server.get("/", (req, res) => {
+  res.send("Server running!");
+});
