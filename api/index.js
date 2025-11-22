@@ -1,14 +1,13 @@
 import express from "express";
 import path from "path";
-import ProductController from "./src/controllers/product.controller.js";
-import UserController from "./src/controllers/user.controller.js";
+import ProductController from "../src/controllers/product.controller.js";
+import UserController from "../src/controllers/user.controller.js";
 import expressEjsLayouts from "express-ejs-layouts";
-import validationMiddleware from "./src/middleware/validation.middleware.js";
-import { uploadFile } from "./src/middleware/file-upload.middleware.js";
-import session from "express-session";
-import { auth } from "./src/middleware/auth.middleware.js";
+import validationMiddleware from "../src/middleware/validation.middleware.js";
+import { uploadFile } from "../src/middleware/file-upload.middleware.js";
+import { auth } from "../src/middleware/auth.middleware.js";
 import cookieParser from "cookie-parser";
-import { setLastVisit } from "./src/middleware/lastVisit.middleware.js";
+import { setLastVisit } from "../src/middleware/lastVisit.middleware.js";
 
 const server = express();
 // Serve static files from the 'public' directory
@@ -17,12 +16,13 @@ server.use(cookieParser());
 
 // Middleware to parse URL-encoded bodies
 server.use(express.urlencoded({ extended: true }));
+import cookieSession from "cookie-session";
+
 server.use(
-  session({
-    secret: "SecretKey",
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: false },
+  cookieSession({
+    name: "session",
+    keys: ["SecretKey"],
+    maxAge: 24 * 60 * 60 * 1000,
   })
 );
 
